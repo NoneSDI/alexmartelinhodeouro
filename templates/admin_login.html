@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Admin - Alex Martelinho de Ouro</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/img/logo1.png" type="image/png" />
+</head>
+<body class="admin-body">
+  <header class="topbar">
+    <a href="/" class="logo">
+      <img src="/static/img/logo.png" alt="Alex Martelinho de Ouro" />
+    </a>
+  </header>
+
+  <main class="login-container">
+    <h2>Área Administrativa</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form method="POST" action="/admin/login" class="login-form">
+      <input type="text" name="username" placeholder="Usuário" required />
+      <input type="password" name="password" placeholder="Senha" required />
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 Alex Martelinho de Ouro. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

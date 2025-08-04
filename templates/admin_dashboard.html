@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel Admin - Alex Martelinho de Ouro</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/img/logo1.png" type="image/png" />
+  <script defer src="/static/js/script.js"></script>
+</head>
+<body class="admin-body">
+  <header class="topbar">
+    <a href="/" class="logo">
+      <img src="/static/img/logo.png" alt="Alex Martelinho de Ouro" />
+    </a>
+    <nav class="nav">
+      <a href="/">Início</a>
+      <a href="/admin/logout" class="btn-sair">Sair</a>
+    </nav>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-section">
+      <h2>Adicionar Trabalho</h2>
+      <form method="POST" enctype="multipart/form-data" class="admin-form">
+        <input name="titulo" placeholder="Título" required />
+        <textarea name="descricao" placeholder="Descrição" required></textarea>
+        <label>Imagem Antes:</label>
+        <input type="file" name="antes" accept="image/*" required />
+        <label>Imagem Depois:</label>
+        <input type="file" name="depois" accept="image/*" required />
+        <button type="submit" class="btn-primary">Salvar</button>
+      </form>
+    </section>
+
+    <section class="admin-section">
+      <h2>Trabalhos Cadastrados</h2>
+      {% if trabalhos %}
+        <div class="grid">
+          {% for t in trabalhos %}
+            <div class="card">
+              <div class="slider">
+                <img src="/static/uploads/{{ t[3] }}" class="before" alt="Antes: {{ t[1] }}" />
+                <img src="/static/uploads/{{ t[4] }}" class="after" alt="Depois: {{ t[1] }}" />
+                <button class="prev" aria-label="Mostrar Antes">&#10094;</button>
+                <button class="next" aria-label="Mostrar Depois">&#10095;</button>
+              </div>
+              <h3>{{ t[1] }}</h3>
+              <p>{{ t[2] }}</p>
+              <form action="{{ url_for('delete_trabalho', id=t[0]) }}" method="post" onsubmit="return confirm('Deseja mesmo excluir este trabalho?');">
+                <button type="submit" class="btn-delete">Excluir</button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Nenhum trabalho cadastrado ainda.</p>
+      {% endif %}
+    </section>
+
+    <section class="admin-section">
+      <h2>Adicionar Vídeo (Case)</h2>
+      <form action="/admin/add_video" method="POST" class="admin-form">
+        <input name="titulo" placeholder="Título do vídeo" required />
+        <input name="url" placeholder="URL do vídeo (YouTube)" required />
+        <button type="submit" class="btn-primary">Salvar vídeo</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Alex Martelinho de Ouro. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

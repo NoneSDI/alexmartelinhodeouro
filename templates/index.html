@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alex Martelinho de Ouro</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/img/logo1.png" type="image/png" />
+  <script defer src="/static/js/script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a href="/" class="logo">
+      <img src="/static/img/logo.png" alt="Alex Martelinho de Ouro" />
+    </a>
+    <nav class="nav">
+      <a href="/">Início</a>
+      <a href="https://www.instagram.com/alexmartelinho10">Instagram</a>
+      <a href="#avaliacoes">Avaliações</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Alex Martelinho de Ouro</h1>
+    <p>Recuperação de amassados sem pintura, com perfeição e rapidez.</p>
+    <a href="https://wa.me/5544998128417" class="btn-primary">Solicitar Orçamento</a>
+  </section>
+
+  <section id="trabalhos" class="works">
+    <h2>Trabalhos Realizados</h2>
+    <div class="grid">
+      {% for t in trabalhos %}
+      <div class="card">
+        <div class="slider">
+          <img src="/static/uploads/{{ t[3] }}" class="before" alt="Antes: {{ t[1] }}" />
+          <img src="/static/uploads/{{ t[4] }}" class="after" alt="Depois: {{ t[1] }}" />
+          <button class="prev" aria-label="Mostrar imagem Antes">&#10094;</button>
+          <button class="next" aria-label="Mostrar imagem Depois">&#10095;</button>
+        </div>
+        <h3>{{ t[1] }}</h3>
+        <p>{{ t[2] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="avaliacoes" class="reviews">
+    <h2>Avaliações</h2>
+    <div class="reviews-widget">
+      <script src="https://static.elfsight.com/platform/platform.js" async></script>
+      <div class="elfsight-app-3f18eee9-d0c9-42a3-91e9-96c16a192565" data-elfsight-app-lazy></div>
+    </div>
+  </section>
+
+  <!-- SOBRE MIM -->
+  <section class="sobre-mim-section bg-vermelho">
+    <div class="container">
+      <div class="sobre-mim">
+        <img src="/static/img/proprietario.jpg" alt="Foto do proprietário" class="foto-perfil">
+        <div class="texto">
+          <h2>Sobre mim</h2>
+          <p>
+            Olá! Me chamo Alex, sou especialista em martelinho de ouro com mais de 10 anos de experiência. 
+            Tenho paixão por restaurar carros e garantir que cada cliente saia satisfeito. 
+            Trabalho com precisão, transparência e dedicação total ao que faço.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES - FLASHCARDS -->
+  <section class="valores-section bg-branco">
+    <div class="container">
+      <h2 class="center">Nossos Valores</h2>
+      <div class="flashcards">
+
+        <div class="card" onclick="this.classList.toggle('ativo')">
+          <div class="card-inner">
+          <div class="frente">Qualidade</div>
+          <div class="verso">Garantia de serviço impecável com materiais e técnicas de alto padrão.</div>
+        </div>
+        </div>
+
+        <div class="card" onclick="this.classList.toggle('ativo')">
+          <div class="card-inner">
+          <div class="frente">Eficiência</div>
+          <div class="verso">Atendimento ágil com foco em resultados rápidos e duradouros.</div>
+        </div>
+        </div>
+
+        <div class="card" onclick="this.classList.toggle('ativo')">
+          <div class="card-inner">
+          <div class="frente">Compromisso</div>
+          <div class="verso">Honramos prazos e combinados com responsabilidade e seriedade.</div>
+        </div>
+        </div>
+
+        <div class="card" onclick="this.classList.toggle('ativo')">
+          <div class="card-inner">
+          <div class="frente">Profissionalismo</div>
+          <div class="verso">Experiência, ética e respeito em cada atendimento.</div>
+        </div>
+        </div>
+
+        
+        <div class="card" onclick="this.classList.toggle('ativo')">
+            <div class="card-inner">
+            <div class="frente">Satisfação do cliente</div>
+            <div class="verso">Nosso foco principal é a sua alegria ao ver o carro renovado.</div>
+        </div>
+        </div>
+
+        <!-- Flashcard corrigido -->
+        <div class="card" onclick="this.classList.toggle('ativo')">
+          <div class="card-inner">
+            <div class="frente">Soluções personalizadas</div>
+            <div class="verso">Cada cliente e cada carro é único. Trabalhamos conforme sua necessidade.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p style="text-align: left;">Fone: (44) 99812-8417 <br></p>
+    <p style="text-align: left;">Rua David Pavão, 419 - Jardim Verão - Sarandi/Paraná</p>
+    <p style="text-align: left;">Maringá-PR e região</p> <br><br>   
+
+    <p>© 2025 Alex Martelinho de Ouro. Todos os direitos reservados.</p>
+    <p>Desenvolvido por <a href="https://github.com/NoneSDI">N-one</a> </p>
+  </footer>
+
+  <a href="https://wa.me/5544998128417" target="_blank" class="whatsapp-icon" aria-label="WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+</body>
+</html>
