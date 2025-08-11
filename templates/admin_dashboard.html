@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Painel Admin - Alex Martelinho de Ouro</title>
-  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/style-admin.css" />
   <link rel="icon" href="/static/img/logo1.png" type="image/png" />
   <script defer src="/static/js/script.js"></script>
 </head>
 <body class="admin-body">
+
   <header class="topbar">
     <a href="/" class="logo">
       <img src="/static/img/logo.png" alt="Alex Martelinho de Ouro" />
@@ -20,7 +21,9 @@
   </header>
 
   <main class="admin-main">
-    <section class="admin-section">
+    
+    <!-- Adicionar Trabalho -->
+    <section class="admin-section section-alt1">
       <h2>Adicionar Trabalho</h2>
       <form method="POST" enctype="multipart/form-data" class="admin-form">
         <input name="titulo" placeholder="Título" required />
@@ -33,7 +36,8 @@
       </form>
     </section>
 
-    <section class="admin-section">
+    <!-- Trabalhos Cadastrados -->
+    <section class="admin-section section-alt2">
       <h2>Trabalhos Cadastrados</h2>
       {% if trabalhos %}
         <div class="grid">
@@ -58,18 +62,38 @@
       {% endif %}
     </section>
 
-    <section class="admin-section">
+    <!-- Adicionar Vídeo -->
+    <section class="admin-section section-alt1">
       <h2>Adicionar Vídeo (Case)</h2>
-      <form action="/admin/add_video" method="POST" class="admin-form">
+      <form action="/admin/add_video" method="POST" enctype="multipart/form-data" class="admin-form">
         <input name="titulo" placeholder="Título do vídeo" required />
-        <input name="url" placeholder="URL do vídeo (YouTube)" required />
+        <input name="url" placeholder="URL do vídeo (YouTube, Vimeo, etc.)" required />
         <button type="submit" class="btn-primary">Salvar vídeo</button>
       </form>
+
+      <h3>Vídeos cadastrados:</h3>
+      {% if videos %}
+        <ul class="video-list">
+          {% for v in videos %}
+            <li>
+              <strong>{{ v[1] }}</strong><br/>
+              <iframe width="320" height="240" src="{{ v[2] }}" frameborder="0" allowfullscreen></iframe>
+              <form action="{{ url_for('delete_video', id=v[0]) }}" method="post" onsubmit="return confirm('Deseja excluir este vídeo?');">
+                <button type="submit" class="btn-delete">Excluir</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Nenhum vídeo cadastrado ainda.</p>
+      {% endif %}
     </section>
+
   </main>
 
   <footer>
     <p>© 2025 Alex Martelinho de Ouro. Todos os direitos reservados.</p>
   </footer>
+
 </body>
 </html>

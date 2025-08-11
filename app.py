@@ -48,7 +48,6 @@ def admin_login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        # Usuário e senha fixos
         if username == 'admin' and password == 'admin':
             session['logged_in'] = True
             return redirect(url_for('admin_dashboard'))
@@ -76,14 +75,12 @@ def admin_dashboard():
             flash('Todos os campos são obrigatórios.')
             return redirect(url_for('admin_dashboard'))
 
-        # Salvar imagens
         os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
         antes_path = os.path.join(app.config['UPLOAD_FOLDER'], imagem_antes.filename)
         depois_path = os.path.join(app.config['UPLOAD_FOLDER'], imagem_depois.filename)
         imagem_antes.save(antes_path)
         imagem_depois.save(depois_path)
 
-        # Salvar no DB
         conn = sqlite3.connect('database/site.db')
         cursor = conn.cursor()
         cursor.execute(
@@ -95,13 +92,10 @@ def admin_dashboard():
         flash('Trabalho adicionado com sucesso!')
         return redirect(url_for('admin_dashboard'))
 
-    # Listar trabalhos
     conn = sqlite3.connect('database/site.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM trabalhos')
     trabalhos = cursor.fetchall()
-
-    # Listar vídeos
     cursor.execute('SELECT * FROM videos')
     videos = cursor.fetchall()
     conn.close()
@@ -113,11 +107,11 @@ def add_video():
     if not is_logged_in():
         return redirect(url_for('admin_login'))
 
-    titulo = request.form['titulo']
-    url = request.form['url']
+    titulo = request.form.get('titulo')
+    url = request.form.get('url')
 
-    if not (titulo and url):
-        flash('Título e URL são obrigatórios.')
+    if not titulo or not url:
+        flash('Preencha todos os campos.', 'error')
         return redirect(url_for('admin_dashboard'))
 
     conn = sqlite3.connect('database/site.db')
@@ -125,7 +119,8 @@ def add_video():
     cursor.execute('INSERT INTO videos (titulo, url) VALUES (?, ?)', (titulo, url))
     conn.commit()
     conn.close()
-    flash('Vídeo adicionado com sucesso!')
+
+    flash('Vídeo adicionado com sucesso!', 'success')
     return redirect(url_for('admin_dashboard'))
 
 @app.route('/admin/delete_trabalho/<int:id>', methods=['POST'])
@@ -164,5 +159,5 @@ def delete_video(id):
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True, host='0.0.0.0', port=5000)
-
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0')

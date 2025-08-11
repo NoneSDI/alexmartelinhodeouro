@@ -3,13 +3,752 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alex Martelinho de Ouro</title>
+  <title>Martelinho de Ouro em Maringá e Região</title>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   <link rel="stylesheet" href="/static/css/style.css" />
   <link rel="icon" href="/static/img/logo1.png" type="image/png" />
   <script defer src="/static/js/script.js"></script>
+  <style>
+
+
+
+/* Aumentar altura dos cards de trabalhos */
+.card-fotos {
+  position: relative;
+  height: 400px;
+}
+
+.card-fotos .slider {
+  height: 100%;
+}
+
+.card-fotos img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.caixa-sombra {
+  box-shadow: 10px 10px;
+}
+
+.card-fotos h3 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+/* Cards de valores maiores e título destacado */
+.valores-section .card {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin: 1rem;
+  overflow: hidden;
+}
+
+.valores-section .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  /* centralizar conteúdo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.pulso{
+  animation: heroZoom 2s ease-in-out infinite alternate;
+  transform-origin: center;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.hero img {
+  animation: heroZoom 7s ease-in-out infinite alternate;
+  transform-origin: center;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.hero img:hover {
+  transform: scale(1.08) translateY(-8px);
+  filter: brightness(1.05);
+}
+
+@keyframes heroZoom {
+  0% {
+    transform: scale(1) translateY(0px);
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+  }
+}
+
+
+@keyframes heroZoom {
+  0% {
+    transform: scale(1) translateY(0px);
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+  }
+}
+
+
+.valores-section .card.ativo .card-inner {
+  transform: rotateY(180deg);
+}
+
+.valores-section .frente,
+.valores-section .verso {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+
+  text-align: center;
+  top: 0;
+  left: 0;
+}
+
+.valores-section .frente {
+  background-color: #2C4B57;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.3rem;
+  z-index: 2;
+}
+
+.valores-section .verso {
+  background-color: #222;
+  color: #ddd;
+  font-size: 1.05rem;
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+
+/* Animações ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.localizacao-section {
+  background-color: #f5f5f5;
+  padding: 50px 0;
+}
+
+.localizacao-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.localizacao-texto {
+  flex: 1;
+  min-width: 300px;
+  padding: 20px;
+}
+
+.localizacao-texto h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #000;
+}
+
+.localizacao-texto p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  background-color: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5c;
+}
+
+.localizacao-mapa {
+  flex: 1;
+  min-width: 300px;
+  height: 350px;
+}
+
+.localizacao-mapa iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .localizacao-container {
+    flex-direction: column;
+  }
+  .localizacao-mapa {
+    height: 300px;
+    margin-top: 20px;
+  }
+}
+
+/* Seção Por Que Escolher */
+.porque-escolher-section {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  padding: 60px 20px;
+  
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fundo com efeito animado */
+.porque-escolher-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: rotateLight 12s linear infinite;
+}
+@keyframes rotateLight {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Título com sombra interna e fonte estilosa */
+.porque-escolher-section h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.3rem;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  text-shadow: inset 0px 2px 4px rgba(0,0,0,0.6),
+               inset 0px -2px 4px rgba(255,255,255,0.2),
+               0px 4px 10px rgba(0,0,0,0.5);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Efeito no hover do título */
+.porque-escolher-section h2:hover {
+  transform: scale(1.08);
+  text-shadow: inset 0px 3px 6px rgba(0,0,0,0.7),
+               inset 0px -3px 6px rgba(255,255,255,0.25),
+               0px 8px 18px rgba(0,0,0,0.6);
+}
+
+.titulo-inicial h2:hover {
+  transform: scale(1.08);
+  text-shadow: inset 0px 3px 6px rgba(0,0,0,0.7),
+               inset 0px -3px 6px rgba(255,255,255,0.25),
+               0px 8px 18px rgba(0,0,0,0.6);
+}
+
+/* Título com sombra interna e fonte estilosa */
+.titulo-inicial h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.3rem;
+  color: #fff;
+  padding: 10px 20px;
+  text-shadow: inset 0px 2px 4px rgba(0,0,0,0.6),
+               inset 0px -2px 4px rgba(255,255,255,0.2),
+               0px 4px 10px rgba(0,0,0,0.5);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Cards de benefícios */
+.cards-beneficios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card-beneficio {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1 1 280px;
+  max-width: 350px;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.card-beneficio:hover {
+  transform: translateY(-8px) scale(1.03);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0px 12px 25px rgba(0,0,0,0.4);
+}
+
+.card-beneficio h3 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.card-beneficio p {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.porque-escolher-section .btn-primary {
+  display: inline-block;
+  margin-top: 40px;
+  background: #25D366;
+  color: white;
+  padding: 14px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+.porque-escolher-section .btn-primary:hover {
+  background: #1ebe5c;
+  transform: scale(1.05);
+}
+
+.porque-escolher-section::before {
+  pointer-events: none; /* evita bloquear cliques nos elementos abaixo */
+}
+footer {
+  background-color: #0a0a0a; /* preto escuro */
+  color: #ddd;
+  padding: 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap;
+  position: relative;
+  gap: 20px;
+  font-size: 0.95rem;
+}
+
+/* Linha vertical central */
+footer::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background-color: #444;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+/* Container informações - esquerda */
+footer .contato {
+  flex: 1 1 45%;
+  text-align: left;
+  line-height: 1.6;
+  z-index: 1;
+}
+
+/* Links sem underline e com hover animado */
+footer .contato a {
+  color: gold;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+footer .contato a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: gold;
+  transition: width 0.3s ease;
+}
+
+footer .contato a:hover {
+  color: #ffcc00;
+}
+
+footer .contato a:hover::after {
+  width: 100%;
+}
+
+/* Container das redes sociais - direita */
+footer .social-icons {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: flex-start; /* mudou para esquerda dentro da div */
+  gap: 20px;
+  align-items: center;
+  z-index: 1;
+  padding-left: 10px; /* deixa os ícones mais perto da linha divisória */
+}
+
+/* Links dos ícones */
+footer .social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2.5px solid gold;
+  color: gold;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+footer .social-icons a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: gold;
+  top: 100%;
+  left: 0;
+  transition: top 0.3s ease;
+  z-index: -1;
+}
+
+footer .social-icons a:hover::before {
+  top: 0;
+}
+
+footer .social-icons a:hover {
+  color: #0a0a0a;
+  box-shadow: 0 0 12px gold;
+}
+
+/* Ícones em imagem dentro do círculo */
+footer .social-icons img {
+  width: 22px;
+  height: 22px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+  transition: filter 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+footer .social-icons a:hover img {
+  filter: none;
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  footer::before {
+    display: none;
+  }
+
+  footer .contato,
+  footer .social-icons {
+    flex: none;
+    width: 100%;
+    justify-content: center !important;
+    margin-bottom: 20px;
+  }
+
+  footer .social-icons {
+    justify-content: center;
+    padding-left: 0;
+  }
+}
+
+/* Estilo base dos links da navbar */
+header .nav a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Barra animada (antes invisível) */
+header .nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: gold;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Hover que expande a barra e muda a cor do texto */
+header .nav a:hover {
+  color: #ffcc00;
+}
+
+header .nav a:hover::after {
+  width: 100%;
+}
+
+/*sobre mim*/
+.sobre-mim-section {
+  position: relative;
+  background-color: #1e1e1e;  /* Vermelho escuro */
+  color: #fff;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden; /* para esconder partículas que saem da área */
+}
+
+#particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* para não interferir em cliques */
+  z-index: 0;
+}
+
+.sobre-mim-container {
+  position: relative;
+  z-index: 1; /* conteúdo acima das partículas */
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+/* Imagem com entrada e leve zoom animado */
+/* Animação na imagem do perfil */
+.imagem-perfil img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  animation: fadeIn 1s ease forwards, pulseMove 6s ease-in-out infinite;
+}
+
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Texto com slide da direita e fade */
+.texto-sobre {
+  flex: 1 1 400px;
+  font-weight: lighter;
+  font-size: 22px;
+  animation: slideInFade 2s ease forwards;
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.texto-sobre h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: -3px 4px #000;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #fff;
+  padding-bottom: 8px;
+  max-width: fit-content;
+  
+}
+
+/* Botão WhatsApp estilizado com ícone antes do texto e animação pulsante */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25D366;
+  color: white;
+  padding: 14px 26px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 0 15px #25D366;
+  animation: pulseBtn 2.5s infinite ease-in-out;
+  transition: background-color 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5c;
+  box-shadow: 0 0 25px #1ebe5c;
+}
+
+.btn-whatsapp img {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes pulseBtn {
+  0%, 100% {
+    box-shadow: 0 0 15px #25D366;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 25px #25D366;
+    transform: scale(1.05);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .sobre-mim-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .texto-sobre {
+    flex: none;
+  }
+  .imagem-perfil img {
+    margin-bottom: 20px;
+  }
+}
+
+.highlight-box-dynamic {
+  position: relative;
+  background: rgba(20, 20, 20, 0.7);
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-weight: lighter;
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Texto e sombra ao hover */
+.highlight-box-dynamic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Efeito de brilho passando */
+.highlight-box-dynamic::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+/* Animação do brilho no hover */
+.highlight-box-dynamic:hover::before {
+  animation: shimmer 1.2s forwards;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
+
+
+
+
+</style>
 </head>
 <body>
-  <header class="topbar">
+  <header class="topbar reveal">
     <a href="/" class="logo">
       <img src="/static/img/logo.png" alt="Alex Martelinho de Ouro" />
     </a>
@@ -20,119 +759,358 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>Alex Martelinho de Ouro</h1>
-    <p>Recuperação de amassados sem pintura, com perfeição e rapidez.</p>
-    <a href="https://wa.me/5544998128417" class="btn-primary">Solicitar Orçamento</a>
-  </section>
+<section class="hero reveal">
+  <!-- A logo fica fora do fundo com blur -->
+  <div class="hero-logo-container" style="position: relative;">
+    <img style="border-radius: 15px; opacity: 1; border: #fff solid 2px;" src="../static/img/logo1.png" alt="Logo Alex Martelinho de Ouro" class="hero-logo" />
+  </div>
 
-  <section id="trabalhos" class="works">
-    <h2>Trabalhos Realizados</h2>
-    <div class="grid">
+  <!-- Este bloco terá o blur -->
+  <div class="hero-blur-content">
+    <h1 style="font-size: 50px; text-shadow: -3px 4px #222; border-bottom: #fff ;">ALEX MARTELINHO DE OURO</h1>
+
+<div class="highlight-box-dynamic">
+      <h2 style="font-size: 25px; font-weight: bold; text-shadow: -3px 4px #222">
+      Recuperação de amassados sem pintar, com perfeição e rapidez!
+    </h2><br>
+  <p>
+    Seu veículo amassou e não quer perder a originalidade?<br>
+    Quer um lugar de confiança, rápido, justo, honesto, com serviço de extrema qualidade?<br>
+    Venha nos conhecer e fazer um orçamento!<br>
+    Evite transtornos, risco de ter um serviço mal feito, venha nos conhecer e damos a garantia de 100% do serviço. <br>
+    Tem dúvidas sobre nossos trabalhos, role a tela para baixo e verá um pouco mais.
+  </p>
+</div>
+
+
+
+    <a href="https://wa.me/5544998128417" class="btn-whatsapp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+      Solicitar Orçamento</a>
+  </div>
+</section>
+
+<div class="divisao">
+  <br>
+</div>
+
+<section style="padding: 0; margin: 0;" id="trabalhos" class="works reveal">
+  <h2 style="padding-top: 15px; margin-top: 10px; text-shadow: -2px 3px #000; font-size: 2rem; border-bottom: #fff;">TRABALHOS REALIZADOS</h2>
+  <div class="carousel-container">
+    <div class="carousel" id="carousel">
       {% for t in trabalhos %}
-      <div class="card">
-        <div class="slider">
-          <img src="/static/uploads/{{ t[3] }}" class="before" alt="Antes: {{ t[1] }}" />
-          <img src="/static/uploads/{{ t[4] }}" class="after" alt="Depois: {{ t[1] }}" />
-          <button class="prev" aria-label="Mostrar imagem Antes">&#10094;</button>
-          <button class="next" aria-label="Mostrar imagem Depois">&#10095;</button>
+      <div class="carousel-slide">
+        <div class="before-after-wrapper">
+          <div class="before">
+            <img src="/static/uploads/{{ t[3] }}" alt="Antes: {{ t[1] }}">
+            <span class="label" >Antes</span>
+          </div>
+          <div class="after">
+            <img src="/static/uploads/{{ t[4] }}" alt="Depois: {{ t[1] }}">
+            <span class="label">Depois</span>
+          </div>
         </div>
-        <h3>{{ t[1] }}</h3>
-        <p>{{ t[2] }}</p>
       </div>
       {% endfor %}
     </div>
-  </section>
+    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+</section>
 
-  <section id="avaliacoes" class="reviews">
-    <h2>Avaliações</h2>
+<div class="divisao">
+  <br>
+</div>
+
+  <section id="avaliacoes" class="reviews reveal">
+    <h2 class="center" style="color: #fff;border-radius: 3px; text-shadow: -2px 3px #222;">O QUE NOSSOS CLIENTE DIZEM SOBRE NÓS? </h2>
     <div class="reviews-widget">
       <script src="https://static.elfsight.com/platform/platform.js" async></script>
       <div class="elfsight-app-3f18eee9-d0c9-42a3-91e9-96c16a192565" data-elfsight-app-lazy></div>
     </div>
   </section>
 
-  <!-- SOBRE MIM -->
-  <section class="sobre-mim-section bg-vermelho">
+<div class="divisao">
+  <br>
+</div>
+
+  <section  class="porque-escolher-section bg-azul-claro reveal">
     <div class="container">
-      <div class="sobre-mim">
-        <img src="/static/img/proprietario.jpg" alt="Foto do proprietário" class="foto-perfil">
-        <div class="texto">
-          <h2>Sobre mim</h2>
-          <p>
-            Olá! Me chamo Alex, sou especialista em martelinho de ouro com mais de 10 anos de experiência. 
-            Tenho paixão por restaurar carros e garantir que cada cliente saia satisfeito. 
-            Trabalho com precisão, transparência e dedicação total ao que faço.
-          </p>
+      <h2 class="center" style="color: #222; box-shadow: 10px 10px red; background-color: white;border-radius: 3px; "> POR QUE ESCOHER O MARTELINHO DE OURO? </h2> <br>
+      <div class="cards-beneficios">
+        <div class="card-beneficio">
+          <h3>Evita a repintura e valoriza o veículo</h3>
+          <p>Evita repintar seu veículo, mantendo a originalidade das cores e valorizando na revenda.</p>
         </div>
-      </div>
+        <div class="card-beneficio">
+          <h3>Serviço mais rápido</h3>
+          <p>Serviço rápido, feito em pouco tempo e sem sujeira no veículo.</p>
+        </div>
+      </div><br><br><br>
     </div>
   </section>
 
-  <!-- VALORES - FLASHCARDS -->
-  <section class="valores-section bg-branco">
+<div class="divisao">
+  <br>
+</div>
+
+<section style="background-color: #000;" class="localizacao-section reveal" >
+  <div class="localizacao-container" style="background-color: rgb(17, 17, 17); border-radius: 30px; padding: 70px;">
+    <!-- Coluna da esquerda -->
+    <div class="localizacao-texto" >
+      <h2 class="center" style="color: #fff; text-shadow: -2px 3px #000; border: #0f2027; background-color: #0f2027; border-radius: 15px; padding: 10px; margin-bottom: 15px;">E ONDE FICA A OFICINA?</h2> </h2>
+      <p style="color: #fff;">
+         Ao lado temos o mapa com a localização do nosso estabelecimento.  
+         Fique à vontade para entrar em contato conosco pelo botão de WhatsApp abaixo ou vir diretamente à nossa oficina.<br><br>
+         É importante informar que trabalhamos com o modelo agendamento de serviço e nossas vagas são ocupadas muito rápido, então não perca tempo e venha agendar um serviço concosco.
+      </p><br>
+    </div>
+
+    <!-- Coluna da direita -->
+    <div class="localizacao-mapa">
+      <a href="https://www.google.com/maps/place/Rua+David+Pavão,+419+-+Jardim+Verão,+Sarandi+-+PR" target="_blank">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.153635774708!2d-51.8753538!3d-23.5156472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ecd097c7f42cc1%3A0x46e1e255d7cfc0d3!2sRua%20David%20Pav%C3%A3o%2C%20419%20-%20Jardim%20Ver%C3%A3o%2C%20Sarandi%20-%20PR!5e0!3m2!1spt-BR!2sbr!4v1690000000000"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divisao">
+  <br>
+</div>
+
+  <section class="titulo-inicial valores-section reveal" style="background-color: #111;">
     <div class="container">
-      <h2 class="center">Nossos Valores</h2>
+      <h2 class="center highlight-box-dynamic" style="background-color: #0F2027; color: #fff; text-shadow: -3px 4px #000; font-size: 2rem; border: #0f2027;  border-radius: 15px; padding-left: 50px; padding-right: 50px;">NOSSOS VALORES </h2>
       <div class="flashcards">
 
         <div class="card" onclick="this.classList.toggle('ativo')">
           <div class="card-inner">
-          <div class="frente">Qualidade</div>
-          <div class="verso">Garantia de serviço impecável com materiais e técnicas de alto padrão.</div>
-        </div>
-        </div>
-
-        <div class="card" onclick="this.classList.toggle('ativo')">
-          <div class="card-inner">
-          <div class="frente">Eficiência</div>
-          <div class="verso">Atendimento ágil com foco em resultados rápidos e duradouros.</div>
-        </div>
+            <div class="fundo-card frente">
+              Qualidade
+              <span class="click-hint">clique aqui</span>
+            </div>
+            <div class="verso">Garantia de serviço impecável com materiais e técnicas de alto padrão.</div>
+          </div>
         </div>
 
         <div class="card" onclick="this.classList.toggle('ativo')">
           <div class="card-inner">
-          <div class="frente">Compromisso</div>
-          <div class="verso">Honramos prazos e combinados com responsabilidade e seriedade.</div>
-        </div>
+            <div class="frente fundo-card">
+              Eficiência
+              <span class="click-hint">clique aqui</span>
+            </div>
+            <div class="verso">Atendimento ágil com foco em resultados rápidos e duradouros.</div>
+          </div>
         </div>
 
         <div class="card" onclick="this.classList.toggle('ativo')">
           <div class="card-inner">
-          <div class="frente">Profissionalismo</div>
-          <div class="verso">Experiência, ética e respeito em cada atendimento.</div>
-        </div>
+            <div class="frente fundo-card">
+              Compromisso
+              <span class="click-hint">clique aqui</span>
+            </div>
+            <div class="verso">Honramos prazos e combinados com responsabilidade e seriedade.</div>
+          </div>
         </div>
 
-        
         <div class="card" onclick="this.classList.toggle('ativo')">
-            <div class="card-inner">
-            <div class="frente">Satisfação do cliente</div>
+          <div class="card-inner">
+            <div class="frente fundo-card">
+              Profissionalismo
+              <span class="click-hint">clique aqui</span>
+            </div>
+            <div class="verso">Experiência, ética e respeito em cada atendimento.</div>
+          </div>
+        </div>
+
+        <div class="card" onclick="this.classList.toggle('ativo')">
+          <div class="card-inner">
+            <div class="frente fundo-card">
+              Satisfação do cliente
+              <span class="click-hint">clique aqui</span>
+            </div>
             <div class="verso">Nosso foco principal é a sua alegria ao ver o carro renovado.</div>
-        </div>
+          </div>
         </div>
 
-        <!-- Flashcard corrigido -->
         <div class="card" onclick="this.classList.toggle('ativo')">
           <div class="card-inner">
-            <div class="frente">Soluções personalizadas</div>
+            <div class="frente fundo-card">
+              Soluções personalizadas
+              <span class="click-hint">clique aqui</span>
+            </div>
             <div class="verso">Cada cliente e cada carro é único. Trabalhamos conforme sua necessidade.</div>
           </div>
         </div>
+
       </div>
-    </div>
+    </div> <br>
+
+
   </section>
 
-  <footer>
-    <p style="text-align: left;">Fone: (44) 99812-8417 <br></p>
-    <p style="text-align: left;">Rua David Pavão, 419 - Jardim Verão - Sarandi/Paraná</p>
-    <p style="text-align: left;">Maringá-PR e região</p> <br><br>   
+<div class="divisao" style="background-color: #222;">
+  <br>
+</div>
 
+<section class="sobre-mim-section reveal">
+  <canvas id="particles-canvas"></canvas>
+  <div class="container sobre-mim-container">
+    <div class="imagem-perfil">
+      <img src="/static/img/proprietario.jpg" alt="Foto do proprietário" />
+    </div>
+    <div class="texto-sobre">
+      <h2>Sobre Mim</h2>
+      <p>
+        Olá! Me chamo Alex, sou especialista em martelinho de ouro com mais de 10 anos de experiência.
+        Tenho paixão por restaurar carros e garantir que cada cliente saia satisfeito.
+        Trabalho com precisão, transparência e dedicação total ao que faço.
+      </p><br><br>
+     <a href="https://wa.me/5544998128417" class="btn-whatsapp btn" target="_blank" rel="noopener noreferrer">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  Iniciar atendimento
+</a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divisao">
+  <br>
+</div>
+
+<footer>
+  <div class="contato">
+    <p>Fone: <a href="tel:+5544998128417">(44) 99812-8417</a></p>
+    <p>Rua David Pavão, 419 - Jardim Verão - Sarandi/Paraná</p>
+    <p>Maringá-PR e região</p>
     <p>© 2025 Alex Martelinho de Ouro. Todos os direitos reservados.</p>
-    <p>Desenvolvido por <a href="https://github.com/NoneSDI">N-one</a> </p>
-  </footer>
+    <p>Desenvolvido por <a href="https://github.com/NoneSDI" target="_blank" rel="noopener">N-one</a></p>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://wa.me/5544998128417" target="_blank" aria-label="WhatsApp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+    <a href="https://instagram.com/alexmartelinho10" target="_blank" aria-label="Instagram">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+    </a>
+  </div>
+</footer>
+
 
   <a href="https://wa.me/5544998128417" target="_blank" class="whatsapp-icon" aria-label="WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </a>
+
+  <script>
+    // Reveal on scroll
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      const windowHeight = window.innerHeight;
+      const revealPoint = 100;
+
+      reveals.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - revealPoint) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    
+
+  let currentSlide = 0;
+
+  function moveSlide(direction) {
+    const carousel = document.getElementById("carousel");
+    const totalSlides = carousel.children.length;
+
+    currentSlide += direction;
+
+    if (currentSlide < 0) {
+      currentSlide = totalSlides - 1;
+    } else if (currentSlide >= totalSlides) {
+      currentSlide = 0;
+    }
+
+    carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+let particles = [];
+const PARTICLE_COUNT = 50;
+
+function init() {
+  resize();
+  particles = [];
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push(createParticle());
+  }
+  animate();
+}
+
+function createParticle() {
+  return {
+    x: Math.random() * width,
+    y: Math.random() * height,
+    radius: 2 + Math.random() * 3,
+    speedX: (Math.random() - 0.5) * 0.5,
+    speedY: (Math.random() - 0.5) * 0.5,
+    alpha: 0.2 + Math.random() * 0.6,
+    alphaChange: (Math.random() * 0.02) + 0.005,
+  };
+}
+
+function resize() {
+  width = canvas.width = canvas.clientWidth;
+  height = canvas.height = canvas.clientHeight;
+}
+
+function animate() {
+  ctx.clearRect(0, 0, width, height);
+
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    // keep inside canvas
+    if (p.x < 0 || p.x > width) p.speedX *= -1;
+    if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+    // alpha pulsate
+    p.alpha += p.alphaChange;
+    if (p.alpha >= 0.8 || p.alpha <= 0.2) p.alphaChange *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 0, 0, ${p.alpha})`; // vermelho com transparência variável
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => {
+  resize();
+});
+
+init();
+
+  
+
+  </script>
 </body>
 </html>
